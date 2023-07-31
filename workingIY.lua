@@ -3,6 +3,7 @@ currentVersion = '5.9.3'
 Players = game:GetService("Players")
 
 repeat task.wait() until typeof(Players.LocalPlayer) == 'Instance'
+repeat task.wait() until Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui")
 
 Holder = Instance.new("Frame")
 Title = Instance.new("TextLabel")
@@ -149,8 +150,8 @@ PARENT = nil
 
 local Main = Instance.new("ScreenGui")
 Main.Name = randomString()
-Main.Parent = Players.LocalPlayer:WaitForChild('PlayerGui')
-Main.ResetOnSpawn = true
+Main.Parent = Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui")
+Main.ResetOnSpawn = false
 PARENT = Main
 
 shade1 = {}
@@ -3807,8 +3808,8 @@ for _, plr in pairs(Players:GetChildren()) do
 end
 
 Players.PlayerRemoving:Connect(function(player)
-	if ESPenabled or CHMSenabled or Players.LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild(player.Name..'_LC') then
-		for i,v in pairs(Players.LocalPlayer:WaitForChild('PlayerGui'):GetChildren()) do
+	if ESPenabled or CHMSenabled or Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild(player.Name..'_LC') then
+		for i,v in pairs(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):GetChildren()) do
 			if v.Name == player.Name..'_ESP' or v.Name == player.Name..'_LC' or v.Name == player.Name..'_CHMS' then
 				v:Destroy()
 			end
@@ -4636,7 +4637,7 @@ IndexContents('',true)
 
 function checkTT()
 	local t
-	local guisAtPosition = Players.LocalPlayer:WaitForChild('PlayerGui'):GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
+	local guisAtPosition = Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
 
 	for _, gui in pairs(guisAtPosition) do
 		if gui.Parent == CMDsF then
@@ -5399,16 +5400,16 @@ end
 
 function ESP(plr)
 	task.spawn(function()
-		for i,v in pairs(Players.LocalPlayer:WaitForChild('PlayerGui'):GetChildren()) do
+		for i,v in pairs(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):GetChildren()) do
 			if v.Name == plr.Name..'_ESP' then
 				v:Destroy()
 			end
 		end
 		wait()
-		if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not Players.LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild(plr.Name..'_ESP') then
+		if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild(plr.Name..'_ESP') then
 			local ESPholder = Instance.new("Folder")
 			ESPholder.Name = plr.Name..'_ESP'
-			ESPholder.Parent = Players.LocalPlayer:WaitForChild('PlayerGui')
+			ESPholder.Parent = Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui")
 			repeat wait(1) until plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
 			for b,n in pairs (plr.Character:GetChildren()) do
 				if (n:IsA("BasePart")) then
@@ -5472,7 +5473,7 @@ function ESP(plr)
 					end
 				end)
 				local function espLoop()
-					if Players.LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild(plr.Name..'_ESP') then
+					if Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild(plr.Name..'_ESP') then
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
@@ -5491,16 +5492,16 @@ end
 
 function CHMS(plr)
 	task.spawn(function()
-		for i,v in pairs(Players.LocalPlayer:WaitForChild('PlayerGui'):GetChildren()) do
+		for i,v in pairs(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):GetChildren()) do
 			if v.Name == plr.Name..'_CHMS' then
 				v:Destroy()
 			end
 		end
 		wait()
-		if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not Players.LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild(plr.Name..'_CHMS') then
+		if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild(plr.Name..'_CHMS') then
 			local ESPholder = Instance.new("Folder")
 			ESPholder.Name = plr.Name..'_CHMS'
-			ESPholder.Parent = Players.LocalPlayer:WaitForChild('PlayerGui')
+			ESPholder.Parent = Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui")
 			repeat wait(1) until plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
 			for b,n in pairs (plr.Character:GetChildren()) do
 				if (n:IsA("BasePart")) then
@@ -5552,16 +5553,16 @@ end
 
 function Locate(plr)
 	task.spawn(function()
-		for i,v in pairs(Players.LocalPlayer:WaitForChild('PlayerGui'):GetChildren()) do
+		for i,v in pairs(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):GetChildren()) do
 			if v.Name == plr.Name..'_LC' then
 				v:Destroy()
 			end
 		end
 		wait()
-		if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not Players.LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild(plr.Name..'_LC') then
+		if plr.Character and plr.Name ~= Players.LocalPlayer.Name and not Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild(plr.Name..'_LC') then
 			local ESPholder = Instance.new("Folder")
 			ESPholder.Name = plr.Name..'_LC'
-			ESPholder.Parent = Players.LocalPlayer:WaitForChild('PlayerGui')
+			ESPholder.Parent = Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui")
 			repeat wait(1) until plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid")
 			for b,n in pairs (plr.Character:GetChildren()) do
 				if (n:IsA("BasePart")) then
@@ -5625,7 +5626,7 @@ function Locate(plr)
 					end
 				end)
 				local function lcLoop()
-					if Players.LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild(plr.Name..'_LC') then
+					if Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild(plr.Name..'_LC') then
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
@@ -6610,7 +6611,7 @@ addcmd('rejoin',{'rj'},function(args, speaker)
 end)
 
 addcmd('autorejoin',{'autorj'},function(args, speaker)
-	local Dir = Players.LocalPlayer:WaitForChild('PlayerGui'):FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay")
+	local Dir = Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay")
 	Dir.DescendantAdded:Connect(function(Err)
 		if Err.Name == "ErrorTitle" then
 			Err:GetPropertyChangedSignal("Text"):Connect(function()
@@ -7373,7 +7374,7 @@ end)
 
 function deleteGuisAtPos()
 	pcall(function()
-		local guisAtPosition = Players.LocalPlayer.PlayerGui:GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
+		local guisAtPosition = speaker:FindFirstChildWhichIsA("PlayerGui"):GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
 		for _, gui in pairs(guisAtPosition) do
 			if gui.Visible == true then
 				gui:Destroy()
@@ -7425,11 +7426,11 @@ addcmd('showiy',{'unhideiy'},function(args, speaker)
 end)
 
 addcmd('rec', {'record'}, function(args, speaker)
-	return Players.LocalPlayer:WaitForChild('PlayerGui'):ToggleRecording()
+	return Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):ToggleRecording()
 end)
 
 addcmd('screenshot', {'scrnshot'}, function(args, speaker)
-	return Players.LocalPlayer:WaitForChild('PlayerGui'):TakeScreenshot()
+	return Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):TakeScreenshot()
 end)
 
 addcmd('togglefs', {'togglefullscreen'}, function(args, speaker)
@@ -7615,7 +7616,7 @@ end)
 
 addcmd('noesp',{'unesp'},function(args, speaker)
 	ESPenabled = false
-	for i,c in pairs(Players.LocalPlayer:WaitForChild('PlayerGui'):GetChildren()) do
+	for i,c in pairs(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):GetChildren()) do
 		if string.sub(c.Name, -4) == '_ESP' then
 			c:Destroy()
 		end
@@ -7711,7 +7712,7 @@ addcmd('nochams',{'unchams'},function(args, speaker)
 	CHMSenabled = false
 	for i,v in pairs(Players:GetChildren()) do
 		local chmsplr = v
-		for i,c in pairs(Players.LocalPlayer:WaitForChild('PlayerGui'):GetChildren()) do
+		for i,c in pairs(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):GetChildren()) do
 			if c.Name == chmsplr.Name..'_CHMS' then
 				c:Destroy()
 			end
