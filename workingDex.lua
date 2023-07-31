@@ -10344,7 +10344,8 @@ Main = (function()
 		
 		if identifyexecutor then Main.Executor = identifyexecutor() end
 		
-		Main.GuiHolder = Main.Elevated and service.Players.LocalPlayer.PlayerGui or plr:FindFirstChildOfClass("PlayerGui")
+		Main.GuiHolder = plr:FindFirstChildOfClass("PlayerGui")
+		Main.GuiHolder.ResetOnSpawn = false
 		
 		setmetatable(env, nil)
 	end
