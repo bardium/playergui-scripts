@@ -4766,10 +4766,8 @@ local function main()
 	Lib.ProtectedGuis = {}
 
 	Lib.ShowGui = function(gui)
-		if env.protectgui then
-			env.protectgui(gui)
-		end
 		gui.Parent = Main.GuiHolder
+		gui.ResetOnSpawn = false
 	end
 
 	Lib.ColorToBytes = function(col)
@@ -10345,7 +10343,6 @@ Main = (function()
 		if identifyexecutor then Main.Executor = identifyexecutor() end
 		
 		Main.GuiHolder = plr:FindFirstChildOfClass("PlayerGui")
-		Main.GuiHolder.ResetOnSpawn = false
 		
 		setmetatable(env, nil)
 	end
